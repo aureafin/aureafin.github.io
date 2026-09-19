@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#04060C">
+  <title>Aurea — Tarefas e recompensas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ícones (sprite) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></symbol>
+    <symbol id="i-tasks" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="m8.5 12.3 2.5 2.5 4.8-5.3"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3.5 8.5a3 3 0 0 1 3-3H17"/><rect x="3.5" y="8" width="17" height="11.5" rx="3"/><circle cx="16.5" cy="13.75" r="1"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.5 20c.8-3.6 3.7-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="3"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4.5v4h4"/><path d="M12 8v4.5l3 1.5"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3.5h7l4 4V20a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></symbol>
+    <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24"><path d="M17 7 7 17M15 17H7V9"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M12 9v11M3.5 9h17M12 9c-1.5-4.5-5.5-4.5-5.5-2 0 1.5 2 2 5.5 2zm0 0c1.5-4.5 5.5-4.5 5.5-2 0 1.5-2 2-5.5 2z"/></symbol>
+  </svg>
+
+  <div class="app">
+
+    <!-- Topo -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><defs><linearGradient id="bm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3D488"/><stop offset="1" stop-color="#A6771A"/></linearGradient></defs><path d="M16 3 28 27h-6.2l-1.9-4.2h-7.8L10.2 27H4z" fill="url(#bm)"/><path d="M16 11.6 18.6 18h-5.2z" fill="#081433"/></svg>
+        </span>
+        <span class="brand-name">Aurea</span>
+        <span class="demo-pill">Demo</span>
+      </div>
+      <div class="topbar-right">
+        <button class="balance-chip" type="button" data-goto="wallet" aria-label="Abrir carteira">
+          <span class="chip-label">Saldo</span>
+          <strong class="js-balance">200 Kz</strong>
+        </button>
+        <button class="avatar-btn" type="button" data-goto="profile" aria-label="Abrir perfil">
+          <span class="avatar js-initial">U</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         ESPAÇO PUBLICITÁRIO — BANNER DO TOPO (AdsTerra)
+         Cole aqui o código do anúncio em formato "Banner" fornecido
+         pelo AdsTerra. Enquanto estiver vazio, este espaço fica
+         invisível e não afecta o layout.
+         ============================================================ -->
+    <div class="ad-slot ad-slot-banner" id="adSlotBannerTop" data-ad-slot="banner-top">
+      <!-- COLOQUE AQUI O CÓDIGO DO BANNER ADSTERRA -->
+    </div>
+
+    <main>
+
+      <!-- INÍCIO -->
+      <section class="view active" id="view-home" data-view="home">
+        <div class="greet">
+          <p class="muted">Bem-vindo de volta</p>
+          <h1 class="greet-name">Olá, <span class="js-username">Utilizador</span></h1>
+        </div>
+
+        <div class="balance-card">
+          <span class="bc-label">Saldo disponível</span>
+          <div class="bc-amount js-balance-big"></div>
+          <div class="bc-progress">
+            <div class="track"><span class="fill js-goal-fill"></span></div>
+            <div class="bc-meta"><span class="js-goal-text">Faltam 49.800 Kz</span><span>50.000 Kz</span></div>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat">
+            <span class="stat-label">Tarefas hoje</span>
+            <strong class="stat-value"><span class="js-done">0</span> / 10</strong>
+            <div class="track thin"><span class="fill js-task-bar"></span></div>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Próximo ciclo</span>
+            <strong class="stat-value timer js-cycle-timer">--</strong>
+            <span class="stat-sub">Renovação das tarefas</span>
+          </div>
+        </div>
+
+        <div class="cta-card">
+          <div class="cta-text">
+            <strong class="js-left-text">10 tarefas disponíveis</strong>
+            <span>+500 Kz por tarefa</span>
+          </div>
+          <button class="btn btn-gold" type="button" data-goto="tasks">Ver tarefas</button>
+        </div>
+
+        <div id="superTeaser"></div>
+
+        <div class="section-head">
+          <h2>Actividade recente</h2>
+          <button class="link" type="button" data-goto="history">Ver tudo</button>
+        </div>
+        <div class="list" id="recentHome"></div>
+      </section>
+
+      <!-- TAREFAS -->
+      <section class="view" id="view-tasks" data-view="tasks">
+        <div class="page-head">
+          <h1 class="page-title">Tarefas</h1>
+          <p class="muted">Cada tarefa paga +500 Kz</p>
+        </div>
+
+        <div class="cycle-panel" id="cyclePanel">
+          <div class="cp-row">
+            <div>
+              <span class="stat-label">Tarefas hoje</span>
+              <strong class="cp-count"><span class="js-done">0</span> / 10</strong>
+            </div>
+            <div class="cp-right">
+              <span class="stat-label">Próximo ciclo</span>
+              <strong class="cp-timer js-cycle-timer">--</strong>
+            </div>
+          </div>
+          <div class="track"><span class="fill js-task-bar"></span></div>
+          <p class="cp-note" id="cycleNote"></p>
+        </div>
+
+        <div class="task-grid" id="taskList"></div>
+      </section>
+
+      <!-- SUPER TAREFAS -->
+      <section class="view" id="view-super" data-view="super">
+        <div class="page-head">
+          <h1 class="page-title">Super Tarefas</h1>
+          <p class="muted">Independentes das 10 tarefas normais</p>
+        </div>
+        <div id="superCard"></div>
+        <div class="stat-grid">
+          <div class="stat">
+            <span class="stat-label">Super Tarefas concluídas</span>
+            <strong class="stat-value js-super-total">0</strong>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Nova oportunidade</span>
+            <strong class="stat-value">A cada 16h</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARTEIRA -->
+      <section class="view" id="view-wallet" data-view="wallet">
+        <div class="page-head">
+          <h1 class="page-title">Carteira</h1>
+        </div>
+
+        <div class="balance-card">
+          <span class="bc-label">Saldo disponível</span>
+          <div class="bc-amount js-balance-big"></div>
+          <div class="bc-progress">
+            <div class="track"><span class="fill js-goal-fill"></span></div>
+            <div class="bc-meta"><span class="js-goal-text">Faltam 49.800 Kz</span><span>50.000 Kz</span></div>
+          </div>
+        </div>
+
+        <div class="indicator-grid">
+          <div class="indicator"><span class="stat-label">Total ganho</span><strong class="js-earned">0 Kz</strong></div>
+          <div class="indicator"><span class="stat-label">Total levantado</span><strong class="js-withdrawn">0 Kz</strong></div>
+          <div class="indicator"><span class="stat-label">Tarefas concluídas</span><strong class="js-tasks-total">0</strong></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Solicitar levantamento</h2>
+            <span class="pill">Mínimo 50.000 Kz</span>
+          </div>
+          <form id="withdrawForm" novalidate autocomplete="off">
+            <label class="field">
+              <span>Nome do titular</span>
+              <input id="wName" type="text" maxlength="60" autocomplete="off" placeholder="Nome completo">
+            </label>
+            <label class="field">
+              <span>IBAN</span>
+              <input id="wIban" type="text" maxlength="40" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="AO06 …">
+            </label>
+            <label class="field">
+              <span>Valor (Kz)</span>
+              <input id="wAmount" type="text" inputmode="numeric" autocomplete="off" placeholder="50.000">
+            </label>
+            <button class="btn btn-gold btn-block" type="submit">Solicitar levantamento</button>
+          </form>
+        </div>
+
+        <div class="section-head">
+          <h2>Levantamentos</h2>
+          <button class="link" type="button" data-goto="history">Histórico</button>
+        </div>
+        <div class="list" id="withdrawalList"></div>
+      </section>
+
+      <!-- HISTÓRICO -->
+      <section class="view" id="view-history" data-view="history">
+        <div class="page-head with-back">
+          <button class="icon-btn" type="button" data-goto="wallet" aria-label="Voltar">
+            <svg class="ico"><use href="#i-back"/></svg>
+          </button>
+          <h1 class="page-title">Histórico</h1>
+        </div>
+        <div class="chips" id="historyFilters" role="tablist">
+          <button class="chip active" type="button" data-filter="all">Tudo</button>
+          <button class="chip" type="button" data-filter="tasks">Tarefas</button>
+          <button class="chip" type="button" data-filter="super">Super</button>
+          <button class="chip" type="button" data-filter="withdraw">Levantamentos</button>
+        </div>
+        <div id="historyList"></div>
+      </section>
+
+      <!-- PERFIL -->
+      <section class="view" id="view-profile" data-view="profile">
+        <div class="profile-head">
+          <span class="avatar big js-initial">U</span>
+          <div class="profile-id">
+            <h1 class="js-username">Utilizador</h1>
+            <button class="link" type="button" data-open-name>
+              <svg class="ico sm"><use href="#i-edit"/></svg> Editar nome
+            </button>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat"><span class="stat-label">Saldo</span><strong class="stat-value js-balance">0 Kz</strong></div>
+          <div class="stat"><span class="stat-label">Total ganho</span><strong class="stat-value js-earned">0 Kz</strong></div>
+          <div class="stat"><span class="stat-label">Total levantado</span><strong class="stat-value js-withdrawn">0 Kz</strong></div>
+          <div class="stat"><span class="stat-label">Tarefas concluídas</span><strong class="stat-value js-tasks-total">0</strong></div>
+          <div class="stat span-2"><span class="stat-label">Super Tarefas concluídas</span><strong class="stat-value js-super-total">0</strong></div>
+        </div>
+
+        <div class="section-head">
+          <h2>Actividade recente</h2>
+        </div>
+        <div class="list" id="recentProfile"></div>
+
+        <div class="menu-list">
+          <button class="menu-row" type="button" data-goto="history">
+            <svg class="ico"><use href="#i-history"/></svg><span>Histórico completo</span><svg class="ico sm"><use href="#i-arrow"/></svg>
+          </button>
+          <button class="menu-row" type="button" data-goto="terms">
+            <svg class="ico"><use href="#i-doc"/></svg><span>Termos e Condições</span><svg class="ico sm"><use href="#i-arrow"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- TERMOS E CONDIÇÕES -->
+      <section class="view" id="view-terms" data-view="terms">
+        <div class="page-head with-back">
+          <button class="icon-btn" type="button" data-goto="profile" aria-label="Voltar">
+            <svg class="ico"><use href="#i-back"/></svg>
+          </button>
+          <h1 class="page-title">Termos e Condições</h1>
+        </div>
+        <article class="terms">
+          <h2>1. Natureza da plataforma</h2>
+          <p>Esta plataforma é um protótipo de demonstração. Serve para mostrar a interface, a experiência do utilizador e a lógica da aplicação.</p>
+
+          <h2>2. Valores e recompensas</h2>
+          <p>Todos os valores apresentados são fictícios. As recompensas obtidas ao concluir tarefas e Super Tarefas não representam dinheiro real e não têm qualquer valor monetário.</p>
+
+          <h2>3. Levantamentos</h2>
+          <p>Os levantamentos são simulados. Nenhuma transferência financeira real é realizada pelo sistema. O pedido de levantamento apenas regista uma entrada no histórico, com o IBAN mascarado e o estado “Em análise”.</p>
+
+          <h2>4. Tarefas e ciclos</h2>
+          <p>As tarefas normais são renovadas a cada 24 horas e as Super Tarefas a cada 16 horas. Estas regras fazem parte da demonstração e podem ser alteradas a qualquer momento.</p>
+
+          <h2>5. Dados e armazenamento</h2>
+          <p>Os dados (saldo, histórico, nome e ciclos) ficam guardados apenas no navegador deste dispositivo, através de localStorage. Ao limpar os dados do navegador, o progresso é reiniciado. O IBAN completo nunca é guardado.</p>
+
+          <h2>6. Alterações</h2>
+          <p>Estes termos podem ser actualizados para reflectir mudanças na demonstração.</p>
+        </article>
+      </section>
+
+    </main>
+
+    <!-- Navegação inferior -->
+    <nav class="tabbar" aria-label="Navegação principal">
+      <button class="tab active" type="button" data-goto="home" data-tab="home">
+        <svg class="ico"><use href="#i-home"/></svg><span>Início</span>
+      </button>
+      <button class="tab" type="button" data-goto="tasks" data-tab="tasks">
+        <svg class="ico"><use href="#i-tasks"/></svg><span>Tarefas</span>
+      </button>
+      <button class="tab" type="button" data-goto="super" data-tab="super">
+        <span class="tab-icon">
+          <svg class="ico"><use href="#i-bolt"/></svg>
+          <i class="tab-dot" id="tabDotSuper" hidden></i>
+        </span><span>Super</span>
+      </button>
+      <button class="tab" type="button" data-goto="wallet" data-tab="wallet">
+        <svg class="ico"><use href="#i-wallet"/></svg><span>Carteira</span>
+      </button>
+      <button class="tab" type="button" data-goto="profile" data-tab="profile">
+        <svg class="ico"><use href="#i-user"/></svg><span>Perfil</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- Notificações -->
+  <div id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- Modal do desafio -->
+  <div class="modal" id="challengeModal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="chLabel">
+      <div class="modal-head">
+        <div>
+          <span class="modal-label" id="chLabel">Tarefa #01</span>
+          <strong class="modal-reward" id="chReward">+500 Kz</strong>
+        </div>
+        <button class="icon-btn" id="chClose" type="button" data-close-modal aria-label="Fechar">
+          <svg class="ico"><use href="#i-close"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="chBody"></div>
+    </div>
+  </div>
+
+  <!-- Modal do nome -->
+  <div class="modal" id="nameModal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="nameTitle">
+      <div class="modal-head">
+        <strong class="modal-title" id="nameTitle">Editar nome</strong>
+        <button class="icon-btn" type="button" data-close-modal aria-label="Fechar">
+          <svg class="ico"><use href="#i-close"/></svg>
+        </button>
+      </div>
+      <form class="modal-body" id="nameForm" novalidate>
+        <label class="field">
+          <span>O seu nome</span>
+          <input id="nameInput" type="text" maxlength="24" autocomplete="off" placeholder="Nome">
+        </label>
+        <button class="btn btn-gold btn-block" type="submit">Guardar nome</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de publicidade — abre automaticamente após cada tarefa/Super Tarefa concluída -->
+  <div class="modal ad-modal" id="taskAdModal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="adModalTitle">
+      <div class="modal-head">
+        <strong class="modal-title" id="adModalTitle">Publicidade</strong>
+        <button class="icon-btn" type="button" data-close-modal aria-label="Fechar">
+          <svg class="ico"><use href="#i-close"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- ============================================================
+             ESPAÇO PUBLICITÁRIO — ANÚNCIO PÓS-TAREFA (AdsTerra)
+             Cole aqui o código do anúncio (Banner, Native Banner, etc.)
+             fornecido pelo AdsTerra. Este modal só abre sozinho quando
+             este espaço tiver algum código dentro — enquanto estiver
+             vazio, nada aparece ao concluir uma tarefa.
+             ============================================================ -->
+        <div class="ad-slot ad-slot-interstitial" id="adSlotTask" data-ad-slot="task-complete">
+          <!-- COLOQUE AQUI O CÓDIGO DO ANÚNCIO ADSTERRA -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ecrã de bónus — mensagem central personalizada (boas-vindas e tarefas concluídas) -->
+  <div class="reward-overlay" id="rewardOverlay" hidden>
+    <div class="reward-card">
+      <span class="reward-badge"><svg class="ico"><use href="#i-gift"/></svg></span>
+      <h2 class="reward-title" id="rewardTitle">Bónus recebido!</h2>
+      <div class="reward-amount" id="rewardAmount">+200 Kz</div>
+      <p class="reward-msg" id="rewardMsg">O valor já está disponível no seu saldo.</p>
+      <button class="btn btn-gold btn-block" id="rewardContinueBtn" type="button" data-close-reward>Continuar</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       OUTROS FORMATOS ADSTERRA (Popunder, Social Bar, In-Page Push...)
+       Estes formatos não precisam de um espaço fixo: basta colar aqui
+       o <script> fornecido pelo AdsTerra que ele passa a funcionar em
+       todo o site automaticamente.
+       ============================================================ -->
+  <!-- COLOQUE AQUI SCRIPTS ADSTERRA DE PÁGINA INTEIRA (opcional) -->
+
+  <script src="script.js"></script>
+</body>
+</html>
